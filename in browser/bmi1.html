@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BMI</title>
+
+	<script type="text/javascript" src="vue.min.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body style="background-image: url('m3.jpg');">
+	<!-- <div style="background-image: url('image/m3.jpg');"> -->
+	<div id="app">
+
+		<h1>{{message}}</h1>
+		
+		<div class="form-group">
+
+			<label>Your height:</label>
+			<input type="text" name="feet" v-model="feet">(feets)
+			<input type="text" name="inch" v-model="inch">(inches)<br><br>
+
+		
+			<label>Your Weight:</label>
+			<input type="text" name="weight" v-model="weight">(pounds)<br><br>
+
+			<button v-on:click="bmicalculation"> Compute BMI</button>
+
+		</div><br><br>
+
+			<label>BMI:</label>
+			<input type="text" id="kk" v-model="bmi"><br><br>
+
+			<div class="mydiv" style="display: flex">
+				<button style="background-color: red">UnderWeight(<18.5)</button>
+				<button style="background-color: yellow;">NormalWeight(18.5-24.9)</button>
+				<button style="background-color: green;">OverWeight(25-29.9)</button>
+				<button style="background-color: blue;">Obese(>30)</button>
+			</div>
+
+		
+	</div>
+
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				message:'BMI Calculator',
+				feet:'',
+				inch:'',
+				weight:'',
+				bmi:''
+
+			},
+			methods:{
+				bmicalculation:function () {
+					var feets =parseInt(this.feet);
+					var inches=parseInt(this.inch);
+					var inches1=feets*12;
+					var height = inches+inches1;
+					var weights = parseInt(this.weight);
+					var total = ((weights/(height*height))*703).toFixed(1);
+					this.bmi=total;
+
+					if(total < 18.5){
+						$("#kk").css("background-color","red");
+					}
+					else if (total >=18.5 && total <24.9) {
+						$("#kk").css("background-color","yellow");
+						
+					}
+					else if (total >=25 && total <29.9){
+						$("#kk").css("background-color","green");			
+					}
+					else{
+						$("#kk").css("background-color","blue");
+					}
+					
+				}
+			},
+
+
+		})
+				
+	</script>
+</body>
+</html>
